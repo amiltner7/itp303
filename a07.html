@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Need meta tage for bootstrap - we are calling our page Movie Database API -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Movie Database API</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<style>
+		/* I put all of my headers in a class called "header" so I want to make all of them bold so they stand out at the top of the table */
+		.header {
+			/*text-align: center;*/
+			font-weight: bold;
+		}
+		/* I added an 'image' class to all movie poster_path images so that I can size them all the same - we want the width to be 100px and height to be auto. They are 100px because we are using mobile-first responsive design so by default we want the images small. */
+		.image{
+			width: 100px;
+			height: auto;
+		}
+		/* Then we use media tags to set the width to be 150px for any larger devices */
+		@media (min-width: 768px){
+			.image{
+				width: 150px;
+				height: auto;
+			}
+		}
+		@media (min-width: 992px){
+			.image{
+				width: 150px;
+				height: auto;
+			}
+		}
+		@media (min-width: 1200px){
+			.image{
+				width: 150px;
+				height: auto;
+			}
+		}
+		/* Align text of the headers and data to the left so everything is lined up correctly */
+		.head {
+			text-align: left;
+		}
+		.text{
+			text-align: left;
+		}
+
+	</style>
+</head>
+<body>
+	<!-- Container to hold everything on our page - the first two parts are from our example in class with a few adjustments -->
+	<div class="container">
+		<!-- We want everything aligned so use row classes for each section. First, we just want a header h1 -->
+		<div class="row">
+			<h1 class="col-12 mt-4">Movie Database Search API</h1>
+		</div> <!-- .row -->
+
+		<!-- New section for search form -->
+		<div class="row">
+			<!-- Have the row span 12 columns and be called 'search form' -->
+			<form class="col-12" id="search-form">
+				<!-- Use form-row class to align things correctly in the form -->
+				<div class="form-row">
+					<!-- Makes it responsive -->
+					<div class="col-12 mt-4 col-sm-6 col-lg-4">
+						<!-- Have an input field called 'Search:' for the user to enter a movie title or term -->
+						<label for="search-term" class="sr-only">Search:</label>
+						<input type="text" class="form-control" id="search-term" placeholder="Search...">
+						<!-- Set a small error text field below search which we will use if they don't input anything  -->
+						<small id="name-error" class="form-text text-danger"></small>
+					</div>
+					<!-- Then we want a submit button next to it -->
+					<div class="col-12 mt-4 col-sm-auto">
+						<button type="submit" class="btn btn-primary">Search</button>
+					</div>
+				</div> <!-- .form-row -->
+			</form>
+		</div> <!-- .row -->
+
+		<!-- Our last section will show how many results (movies) are being displayed and list the actual movies that meet the search criteria -->
+		<div class="row">
+			<div class="col-12 mt-4">
+				<!-- We want to show how many results are being shown, which will by default be 20 (this is default for our API). We use span and give it an ID so that we can change the number of results based on their search term and how many movies there are -->
+				Showing <span id="num-results" class="font-weight-bold">20</span> result(s).
+				<!-- Since we can't use the table class, I will use a formatted list instead. Start with a ul called 'header-list' that will be a row for the headers -->
+				<ul id="header-list" class="list-group">
+					<!-- One list element and format it so that the headers go across the page so it looks like a table -->
+					<li class="header list-group-item d-flex justify-content-between">
+						<!-- Put a header for each of the elements we will track from a movie: the poster image, title, release date, and rating -->
+						<div class="col-3 head">Poster Image</div>
+						<div class="col-3 head">Title</div>
+						<div class="col-3 head">Release Date</div>
+						<div class="col-3 head">Rating</div>
+					</li>
+				</ul>
+
+				<!-- Create a new ul called 'movie-list' that is empty until we fill it with movies from our movie API. We make this as a separate ul from the header ul because by default when we query new movies they are added to the end of the currently shown list of movies - so we need to be able to clear a ul (without clearing the headers) so that the user just gets the movies they searched for and not the leftovers from previous searches -->
+				<ul id="movie-list" class="list-group">
+
+				</ul>
+			</div>
+		</div> <!-- .row -->
+	</div> <!-- .container -->
+
+	<!-- Script from class -->
+	<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+	<script>
+
+		// First (when the page loads) we want to show 20 movies that are currently showing in theatres. So, we use an ajax tag to get the movie database API url, specifically for the now_playing movies. Then use callback function to get the data and have a fail clause that alerts "AJAX error" in case something goes wrong
+		$.ajax({
+			url: "https://api.themoviedb.org/3/movie/now_playing?api_key=2dd8a16b09d56b6ecc61944afde90e2b&language=en-US&page=1",
+			dataType: "json"
+		}).then((data) => {
+			console.log(data);
+			// First get the actual movie data by doing data.results. Then loop through each movie and call the createRow() function which will get the 4 pieces of information we want and display them in a table format on our page
+			for (movie of data.results) {
+				console.log(movie);
+
+				createRow(movie);
+			}
+		}).fail(() => {
+			alert("AJAX error");
+			console.log(data);
+		})
+		
+
+		// Create a function for when the user submits the form (searches for a movie)
+		document.querySelector('#search-form').onsubmit = function(){
+			// Get the entered search term from the 'search-term' box (trim to remove spaces)
+			var term = document.querySelector('#search-term').value.trim();
+
+			// Need to check that they actually entered something
+			if (term.length > 0) {
+				// Set the name error to nothing if they did
+				document.querySelector("#name-error").innerHTML = "";
+
+				// Similarly to above, use ajax to get the movie db API url, this time for all movies with a search term
+				$.ajax({
+					url: `https://api.themoviedb.org/3/search/movie?api_key=2dd8a16b09d56b6ecc61944afde90e2b&language=en-US&query=${term}&page=1&include_adult=false`,
+					dataType: "json"
+				}).then((data) => {
+					console.log(data);
+					// Get the number of total results which is held as total_results under data
+					const results = data.total_results;
+
+					// The movie DB will cap the number of movies at 20 by default, but if there are more than 20 movies shown we want to display 20 / the real number of movies queried. So, we set the inner HTML of num-results to 20/results
+					if(results > 20) {
+						document.querySelector("#num-results").innerHTML = "20 / " + results;
+					}
+					// If there are less than 20 movies, then we display the actual number of results/results
+					else {
+						document.querySelector("#num-results").innerHTML = results + " / " + results;
+					}
+
+					// Since it starts with 20 movies in theatres, we want to remove those when the user searches for something - so set inner HTML of movie-list ul to nothing
+					document.querySelector("#movie-list").innerHTML = ``;
+
+					// Loop through each movie queried in data.results
+					for (movie of data.results) {
+						console.log(movie);
+
+						// Call the createRow function which will grab the values we want and put them in a table on the page
+						createRow(movie);
+					}
+
+				}).fail(() => {
+					alert("AJAX Error");
+				})
+			}
+			// If the search box is empty, put an error using the name-error inner HTML
+			else{
+				document.querySelector("#name-error").innerHTML = "Please enter your search";
+			}
+
+			// Always return false so the page doesn't refresh after each time the user clicks submit
+			return false;
+		}
+
+
+		// The createRow function will take in a movie (from data.results), grab the required fields (poster, title, release date, and rating) and put them in a table (using ul, li) on the screen 
+		function createRow(movie){
+			// First we need to create all of our elements we will need in HTML: li to create a new list element and then 4 div's for image, title, release date and rating
+			const li = document.createElement("li");
+			const imgDiv = document.createElement("div");
+			const titleDiv = document.createElement("div");
+			const rdateDiv = document.createElement("div");
+			const ratingDiv = document.createElement("div");
+
+			// Add all of the classes we had in our other li so that the content is aligned correctly
+			li.classList.add("list-group-item", "d-flex", "justify-content-between");
+			// Create a separate element for the img since it is not just text (we need to set the src and alt) - add 'image' to the class list so we can use css to format all images the same
+			var img = document.createElement('img');
+			img.classList.add("image");
+
+			// Set the innerHTML of the titleDiv, rdateDiv, and ratingDiv to be the movie title, release date, and average vote, respectively, from the movie db api
+			titleDiv.innerHTML = movie.title; // todo: Fill Out Info
+			rdateDiv.innerHTML = movie.release_date; // todo: Fill Out Info
+			ratingDiv.innerHTML = movie.vote_average; // todo: Fill Out Info
+
+			// Add col-3 to the class list so that each div spans 3 columns (1/4 of 12) so each 'column' in the table is the same size. Also add a text class to the div's that have text so that we can use css to align the text correctly
+			imgDiv.classList.add("col-3");
+			titleDiv.classList.add("col-3", "text");
+			rdateDiv.classList.add("col-3", "text");
+			ratingDiv.classList.add("col-3", "text");
+
+			// Get the poster url from the api using movie.poster_path
+			const poster = movie.poster_path;
+
+			// If it is null, it means there is no image associated with the movie. In that case, set the img source to be a default 'no image available' image
+			if(poster == null){
+				img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png";
+				img.alt = "No_image_available";
+			}
+			// If it is not null, it means there is a poster for the movie so we want to display the image on the page
+			else{
+				// The poster_path only includes the last part of the url so we need to add the first part from the API
+				img.src = "https://image.tmdb.org/t/p/w500" + poster;
+				// Set the alt text to be the title of the movie and then cover
+				img.alt = movie.title + " Cover"; // todo: Fill Out Info
+			}
+			
+			// Append the img to the imgDiv (only need to do this for the image because it is a separate element vs text for the rest which we set using inner HTML)
+			imgDiv.appendChild(img);
+
+			// Append all of the div's to the li
+			li.appendChild(imgDiv);
+			li.appendChild(titleDiv);
+			li.appendChild(rdateDiv);
+			li.appendChild(ratingDiv);
+
+			// Append the li to the movie-list so it appears on the page
+			document.querySelector("#movie-list").appendChild(li);
+		}
+
+	</script>
+</body>
+</html>
