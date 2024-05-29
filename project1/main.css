@@ -1,0 +1,100 @@
+/* For the header, make the background image the image we have on the homepage and we can override it in the gallery.html*/
+#header {
+	background-image: url('img/wrigley_sign.jpeg');
+
+	/* We will also override height in the gallery since it needs to be smaller*/
+	height: 300px;
+	
+	/* The background should cover the entire area and be centered. Also set margin to 0 so that all whitespace is removed*/
+	background-size: cover;
+	background-position: center;
+	margin:0px;
+
+	/* Set defaults for text (white, centered, line height, and shadow). We will override line height in gallery.html to account for change in area size*/
+	color: #FFF;
+	text-align: center;
+	line-height: 400px;
+	text-shadow: 0px 0px 5px #000;
+}
+
+/* Set the width of the main section to be 600px and cetner it so it is the same for both pages. */
+#main {
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 15px;
+}
+
+/* The footer will be on both pages so set the color, alignment, height, and line height*/
+#footer {
+	background-color: #797a79;
+	color: #FFF;
+	text-align: center;
+	height: 50px;
+	line-height: 50px;
+}
+
+/* Both pages will have the same menu bar. List-style should be none to remove the bullet points, margin and padding also need to be set to 0 to remove whitespace*/
+#menu_bar, #menu_bar ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Each list item should have the same color and size, and be centered. The position is relative to the ul*/
+#menu_bar li {
+	background-color: #b50a04;
+	width: 150px;
+	text-align: center;
+
+	position: relative;
+}
+
+/* The menu_bar is what we called our container for the menu, so it should be display flex for our flexbox. Flex-start aligns things on the same axis to the
+left, and then we justify the content to center it on the page. The position is sticky so that the menu moves to the top once we scroll past the background
+image on top. The z-index is 1 so that the menu is on top (which becomes a problem with images)*/
+#menu_bar {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	background-color: #b50a04;
+	/*position: sticky;*/
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	z-index: 1;
+}
+
+/* When we hover over each list item, we want it to change color so the user knows where they are*/
+#menu_bar li:hover {
+	background-color: #0714a3;
+}
+
+/* Set text decoration to none to remove bullet points. Make the anchor tags white and display them as block so that when we hover over any part of the button
+it allows us to click and use that option.*/
+#menu_bar a {
+	text-decoration: none;
+	color: #FFF;
+
+	display: block;
+	height: 50px;
+	line-height: 50px;
+}
+
+/* Make the ul position absolute so that the li's can be relative to it. Remove bullet points by setting display to none*/
+#menu_bar ul {
+	position: absolute;
+	display: none;
+	z-index: 1;
+}
+
+/* When we hover over each ul, display block so we can click anywhere on the block*/
+#menu_bar li:hover ul{
+	display: block;
+}
+
+#menu_bar a:hover, #active-nav {
+	background-color: #0714a3;
+}
+
+

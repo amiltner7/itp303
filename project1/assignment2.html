@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Wrigley Field</title>
+	<!-- Link the main.css file so that we can use its css -->
+	<link rel="stylesheet" href="main.css">
+	<style>
+
+		body {
+			/* remove whitespace by making margin 0 for body and h1*/
+			margin: 0px;
+			background-color: #0714a3;
+		}
+
+		h1 {
+			margin: 0px;
+		}
+
+		#page-wrapper {
+			background-color: #FFF;
+		}
+
+		/* format all images within the paragraphs the same way - float right so they stay to the right and 5px of padding to keep text from being too close to the images*/
+		.p_images {
+			width: 300px;
+			float: right;
+			padding: 5px;
+		}
+		
+		/* the page-wrapper is our container for the flexbox, so display flex and make the direction row reverse so the sidebar shows up on the left side*/
+		#page-wrapper {
+			display: flex;
+			flex-direction: row-reverse;
+
+			/* set margin-left and margin-right to auto so that we center the page-wrapper section. Width increases to 813 because of the sidebar, margins/paddings, and borders*/
+			width: 813px;
+			margin-left: auto;
+			margin-right: auto;
+
+			border: 1px solid #000;
+		}
+
+		/* format the sidebar similarly to the content section, but we want it to be a container for our sidebar images, so display flex and put it in the column direction so that the images display from top to bottom (and wrap them since the width is not large enough for all the images to fit across)*/
+		#sidebar {
+			width: 160px;
+			border-right: 1px solid #000;
+			padding: 15px;
+
+			background-color: #dbd9d9;
+
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+		}
+
+		/* center the images using margin-left and margin-right and then add a padding so the captions aren't too close*/
+		.sidebar_images {
+			width: 160px;
+			height: auto;
+			margin-right: auto;
+			margin-left: auto;
+			padding: 5px;
+		}
+
+		/* align the captio in the center and put a padding so all the images are spaced out down the page*/
+		.caption  {
+			text-align: center;
+			padding-bottom: 100px;
+		}
+
+		/* format all h2's to have a padding of 5px to keep text far enough away*/
+		h2 {
+			padding: 5px;
+		}
+	</style>
+
+</head>
+<body>
+
+	<div id="header">
+		<h1>Wrigley Field</h1>
+	</div>
+
+	<!-- To make our menu bar, we need to create an unordered list, which I will call "menu_bar" -->
+	<ul id="menu_bar">
+		<!-- Then we create our first list item, which is for our home page -->
+		<li>
+			<!-- We need to use an anchor tag so we can click on the item -->
+			<a id="active-nav" href="">Home</a>
+			<!-- We need another unordered list because our Home tab has 3 paragraphs (sub-options). Make an anchor tag for each and link it to the corresponding header name-->
+			<ul>
+				<li><a href="#history">History</a></li>
+				<li><a href="#usage">Usage</a></li>
+				<li><a href="#scoreboard">Scoreboard</a></li>
+			</ul>
+		</li>
+		<!-- Make one more list item for the gallery, and reference it to the gallery.html page (since it is on a separate page) -->
+		<li><a href="gallery.html">Gallery</a></li>
+	</ul>
+
+	<!-- Container for flex box -->
+	<div id="page-wrapper">
+		<div id="main">
+			<!-- We need an id for all of the h2's so that we can reference them from the menu options -->
+			<h2 id="history">History</h2>
+
+			<!-- Create a class for the images within the paragraphs since they all have the same formatting -->
+			<img class="p_images" src="img/historic_wrigley.jpeg" alt="Wrigley Field 1914">
+
+			<p>Baseball executive Charles Weeghman hired his architect Zachary Taylor Davis to design the park, which was ready for baseball by the home opener on April 23, 1914. The original tenants, the Chicago Whales (also called the Chi-Feds), came in second in the Federal League rankings in 1914, and won the league championship in 1915.
+
+			In late 1915, Weeghman's Federal League folded. The resourceful Weeghman formed a syndicate including the chewing gum manufacturer William Wrigley Jr. to buy the Chicago Cubs from Charles P. Taft for about $500,000. Weeghman immediately moved the Cubs from the dilapidated West Side Grounds to his two-year-old park.</p>
+
+			<p>In 1918, Wrigley acquired the controlling interest in the club. In November 1926, he renamed the park Wrigley Field. In 1927, an upper deck was added, and in 1937, Bill Veeck, the son of the club president, planted ivy vines against the outfield walls after seeing the ivy planted at Perry Stadium, Indianapolis.</p>
+
+			<h2 id="usage">Usage</h2>
+
+			<img class="p_images" src="img/football.jpeg" alt="Football at Wrigey Field">
+
+			<p>Wrigley Field's first tenant was the Federal League team, the Chicago Whales, from 1914 to 1915. It has served as the home baseball park for Major League Baseball's Chicago Cubs franchise since 1916.</p>
+			<p>The Chicago Bears of the National Football League played at Wrigley Field from 1921 to 1970 before relocating to Soldier Field. The team had transferred from Decatur, and retained the name "Staleys" for the 1921 season. They renamed themselves the Bears in order to identify with the baseball team, then a common practice in the NFL. Wrigley Field once held the record for the most NFL games played in a single stadium, with 365 regular season games, but this record was surpassed in 2003 by Giants Stadium in New Jersey, thanks to its dual-occupancy by the New York Giants and New York Jets. On September 14, 2003, the game played between the Jets and Miami Dolphins was the 366th regular season NFL game at Giants Stadium, breaking Wrigley's regular season record.[42] The 50 seasons the Bears spent at Wrigley Field had been an NFL record until 2006, when Lambeau Field duplicated this feat by hosting the Green Bay Packers for a 50th season and broke it in 2007. Soldier Field also matched the accomplishment when the Bears played there for their 50th season in 2021.</p>
+			<p>Wrigley Field has also hosted soccer games, the 2009 Winter Classic between the Chicago Blackhawks and Detroit Red Wings, and dozens of concerts.</p>
+
+			<h2 id="scoreboard">Scoreboard</h2>
+
+			<img class="p_images" src="img/scoreboard.jpeg" alt="Wrigley Field Scoreboard">
+
+			<p>The scoreboard was installed in 1937, when Bill Veeck installed the new bleachers. It has remained in place ever since, and has only seen minor technical and cosmetic modifications. The clock was added in 1941, and a fifth row of scores was added to each side in 1961, with a sixth by 1969. A set of light stands facing onto the scoreboard was added in 1988 with the introduction of night games.</p>
+
+			<p>Along with Fenway Park's scoreboard and Minute Maid Park, Oakland-Alameda County Coliseum and Oracle Park's out of town scoreboards, Wrigley is one of the last parks to maintain a hand-turned scoreboard. A number turner watches the score changes on a computer (a ticker tape machine was used in the past), and updates the scoreboard by manually replacing the numbers from within the scoreboard. The scoreboard is made of sheet steel. The numbers that are placed into the inning windows are also steel, painted forest green, and numbered with white numerals. The box for the game playing at Wrigley uses yellow numerals for the current inning. The clock, which sits at the top center of the scoreboard, has never lost time in its 81-year existence.</p>
+
+			<p>Standing over the clock are three flagpoles, one for each division in the National League. There are 15 flags, one for each National League team, and their order on the flagpoles reflects the current standings. The entrance to the scoreboard is a trap-door on the bottom. On the reverse of the scoreboard, visible from the CTA elevated trains, is a blue Cubs pennant in white outlined in red neon. The scoreboard was extensively rehabilitated for the 2010 season.</p>
+		</div>
+
+		<!-- Container for sidebar flex box -->
+		<div id="sidebar">
+			<!-- Create a class for the sidebar images since they all have the same formatting -->
+			<img class="sidebar_images" src="img/renovation.jpeg" alt="Wrigley Field Renovation">
+			<!-- Also make a class for captions so we can format them all the same way -->
+			<div class="caption">Cubs owner Tom Ricketts began renovations on Wrigley Field in 2014 in order to modernize the stadium but also preserve its historic charm</div>
+			<img class="sidebar_images" src="img/ivy.jpeg" alt="Wrigley Field Ivy">
+			<div class="caption">Wrigley Field is famous for its live ivy along the outfield wall</div>
+			<img class="sidebar_images" src="img/lights.jpeg" alt="Wrigley Field Lights">
+			<div class="caption">Wrigley Field was the last stadium to install lights, meaning the Cubs used to only play during the day. The first night game at Wrigley was on August 8, 1988</div>
+			<img class="sidebar_images" src="img/w_flag.jpeg" alt="W Flag">
+			<div class="caption">Whenever the Cubs win, the W flag flies above the center field scoreboard at Wrigley</div>
+			
+		</div>
+
+
+	</div>
+
+	<div id="footer">
+		University of Southern California &copy; 2022
+	</div>
+
+
+</body>
+</html>
+
+

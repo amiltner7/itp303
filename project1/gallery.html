@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wrigley Field | Gallery</title>
+	<!-- Link to main.css so that we can use its css and it is consistent between assignment2.html and gallery.html-->
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<style>
+		/* Override main.css and set a new background image so it is different from the home page. Also make the size of the header smaller (and line height so the header shwos up on the image) per the instructions*/
+		#header {
+			background-image: url('img/inside_wrigley.jpeg');
+			height: 200px;
+
+			line-height: 200px;
+		}
+
+		/* Set the margin of h1 to be 0 to remove whitespace*/
+		h1 {
+			margin: 0px;
+		}
+
+		/* Make the background color green and remove whitespace by setting margin to 0*/
+		body {
+			margin: 0px;
+			background-color: #115208;
+		}
+
+		/* Set the width of the gallery to be the same as the width of the wrapper area in assignment2.html. Center the content as well*/
+		#gallery {
+			background-color: lightgray;
+			/* same width as content+sidebar on home page*/
+			width: 813px;
+			margin-left: auto;
+			margin-right: auto;
+
+			/* The gallery is our container for the flexbox so display flex and all the images will be arranged inside. We want the content to be stretched across the area and the images to wrap around since they will not all fit on one line. We also want everything centered*/
+			display: flex;
+			align-items: flex-start;
+			justify-content: center;
+			flex-wrap: wrap;
+			
+		}
+
+		/* Set a standard height/width for the different rows so we can make a collage that fits the images. Make the position relative since we will have captions on top*/
+		.img-container-r1 {
+			background-color: #CCC;
+			margin: 10px;
+			width: auto;
+			height: 150px;
+
+			overflow: hidden;
+			position: relative;
+		}
+
+		.img-container-r2 {
+			background-color: #CCC;
+			margin: 10px;
+			width: 690px;
+			height: auto;
+
+			overflow: hidden;
+			position: relative;
+		}
+
+		.img-container-r3 {
+			background-color: #CCC;
+			margin: 10px;
+			width: auto;
+			height: 182px;
+
+			overflow: hidden;
+			position: relative;
+		}
+
+		.img-container-r4 {
+			background-color: #CCC;
+			margin: 10px;
+			width: 690px;
+			height: auto;
+
+			overflow: hidden;
+			position: relative;
+		}
+
+		.img-container-r5 {
+			background-color: #CCC;
+			margin: 10px;
+			width: auto;
+			height: 122px;
+
+			overflow: hidden;
+			position: relative;
+		}
+
+		/* fit the image inside each container based on being landscape or vertical (width or height 100% and the other auto)*/
+		.img-container-r5 > img {
+			width: auto;
+			height: 100%;
+		}
+
+		.img-container-r4 > img {
+			width: 100%;
+			height: auto;
+		}
+
+		.img-container-r3 > img {
+			width: auto;
+			height: 100%;
+
+		}
+
+		.img-container-r2 > img {
+			width: 100%;
+			height: auto;
+		}
+
+		.img-container-r1 > img {
+			width: auto;
+			height: 100%;
+		}
+
+		/* Set each caption to be the same color and have absolute position in the middle of the image. Add a padding to adjust the vertical height and account for shorter/longer captions*/
+		.captions, .caption2 {
+			color: #FFF;
+			background-color: rgb(0,0,0);
+
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			bottom: 0px;
+			right: 0px;
+
+			text-align: center;
+			padding-top: 30px;
+			padding-left: 5px;
+			padding-right: 5px;
+			
+
+			background-color: rgba(0,0,0,0.6);
+
+			/* Make the captions hidden until we hover over the image*/
+			visibility: hidden;
+		}
+
+		/* Adjust the different captions in each row by changing padding-top to center them all*/
+		.img-container-r2 .captions, .img-container-r4 .captions {
+			padding-top: 70px;
+			padding-right: 10px;
+			padding-left: 10px;
+		}
+
+		.img-container-r3 .captions {
+			padding-top: 50px;
+			padding-right: 10px;
+			padding-left: 10px;
+		}
+
+		.img-container-r5 .caption2, .img-container-r1 .caption2{
+			padding-top: 50px;
+		}
+
+		/* When we hover, we can now display the caption*/
+		.img-container-r1:hover .captions, .img-container-r1:hover .caption2, .img-container-r2:hover .captions, .img-container-r3:hover .captions, .img-container-r4:hover .captions, .img-container-r5:hover .captions, .img-container-r5:hover .caption2{
+			visibility: visible;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="header">
+		<h1>Gallery</h1>
+	</div>
+
+	<!-- Need the same unordered list as in assignment2.html but the anchor tags link to paragraph headers in the other file, so we need to format them differently -->
+	<ul id="menu_bar">
+		<li>
+			<a href="assignment2.html">Home</a>
+			<ul>
+				<li><a href="assignment2.html#history">History</a></li>
+				<li><a href="assignment2.html#usage">Usage</a></li>
+				<li><a href="assignment2.html#scoreboard">Scoreboard</a></li>
+			</ul>
+		</li>
+		<li><a id="active-nav" href="#gallery">Gallery</a></li>
+	</ul>
+
+	<!-- Container for flex box -->
+	<div id="gallery">
+		<!-- First I created div's of image containers and tried to format them the way I wanted, and then added image tags from the img folder. I created different classes for each row so I could fit the images in a collage format -->
+		<div class="img-container-r1">
+			<img src="img/clubhouse.jpeg" alt="Chicago Cubs Clubhouse inside Wrigley Field">
+			<!-- Similarly to the assignment2.html, we need a class for all the captions so we can format them similarly -->
+			<div class="caption2">The Cubs new state of the art clubhouse inside Wrigley</div>
+		</div>
+
+		<div class="img-container-r1">
+			<img src="img/dimensions.jpeg" alt="Wrigey Field Dimensions">
+			<div class="caption2">The dimensions of Wrigley Field</div>
+		</div>
+
+		<div class="img-container-r1">
+			<img src="img/gallagher_way.jpeg" alt="Gallagher Way at Wrigley Field">
+			<div class="captions">Part of the new renovations included a park outside of Wrigley called Gallagher Way, where fans can watch Cubs games, movies, and concerts</div>
+		</div>
+
+		<div class="img-container-r2">
+			<img src="img/bleachers.jpeg" alt="Wrigley Field Bleachers">
+			<div class="captions">One of the most popular places to sit inside Wrigley is the bleachers. It is all general admission seating, and fans love to drink and have a good time</div>
+		</div>
+
+		<div class="img-container-r3">
+			<img src="img/haray_caray.jpeg" alt="Former Cubs Announcer Haray Caray">
+			<div class="captions">Former Cubs announcer Haray Caray, beloved by Cubs fans and famous for singing 'Take me Out to the Ballgame' during the 7th Inning Stretch</div>
+		</div>
+
+		<div class="img-container-r3">
+			<img src="img/parade.jpeg" alt="Cubs World Series Parade 2016">
+			<div class="captions">After not winning a World Series in 108 years, Cubs fans came from all over the world to celebrate in 2016. The parade was one of the largest gatherings in human history with over 5 million Cubs fans in attendance</div>
+		</div>
+
+		<div class="img-container-r4">
+			<img src="img/rooftops.jpeg" alt="Wrigley Rooftops">
+			<div class="captions">One of the most unique parts of Wrigley Field are the rooftops across the street, where fans can sit and enjoy the game from a distance</div>
+		</div>
+
+		<div class="img-container-r5">
+			<img src="img/cubs_win.jpeg" alt="Wrigley Field after Cubs World Series Win 2016">
+			<div class="caption2">The Cubs won their first World Series since 1908 in 2016</div>
+		</div>
+
+		<div class="img-container-r5">
+			<img src="img/cubs_2022.jpeg" alt="Chicago Cubs Players after win 2022">
+			<div class="captions">After each win, Cubs players line up and high-five while the fans sing "Go Cubs Go" behind them</div>
+		</div>
+
+		<div class="img-container-r5">
+			<img src="img/wrigley_back.jpeg" alt="Wrigley Field from back">
+			<div class="captions">View from behind of Wrigley - taken near the Red Line train which fans can take to easily access the stadium</div>
+		</div>
+
+
+	</div>
+
+	<!-- Same footer content as in assignment2.html -->
+	<div id="footer">
+		University of Southern California &copy; 2022
+	</div>
+
+</body>
+
+</html>

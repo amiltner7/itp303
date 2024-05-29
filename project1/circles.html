@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Circles</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+	<style>
+
+		#circles {
+/*			background-color: lightgray;*/
+			/* same width as content+sidebar on home page*/
+			width: 1000px;
+			margin-left: auto;
+			margin-right: auto;
+
+			/* The gallery is our container for the flexbox so display flex and all the images will be arranged inside. We want the content to be stretched across the area and the images to wrap around since they will not all fit on one line. We also want everything centered*/
+			display: flex;
+			align-items: flex-start;
+			justify-content: center;
+			flex-wrap: wrap;
+		}
+
+		.circle {
+			background: lightblue;
+			border-radius: 50%;
+			width: 300px;
+			height: 300px;
+/*			position: absolute;*/
+
+			margin-left: 20px;
+
+			overflow: hidden;
+			position: relative;
+		}
+
+		.circle > img {
+			width: auto;
+			height: 100%;
+		}
+
+		.caption {
+			position: absolute;
+
+			color: yellow;
+
+
+			border-radius: 50%;
+			width: 300px;
+			height: 300px;
+
+			text-align: center;
+			padding-top: 150px;
+			/*padding-top: 150px;
+			padding-left: 75px;
+			padding-right: 75px;
+			padding-bottom: 150px;
+			border-radius: 50%;*/
+
+			background-color: rgba(0,0,0,0.8);
+
+			visibility: hidden;
+		}
+
+		.circle:hover .caption {
+			visibility: visible;
+		}
+
+
+	</style>
+</head>
+<body>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="index.php">Home</a></li>
+		<li class="breadcrumb-item active">Search</li>
+	</ol>
+	<div class="container">
+		<div class="row">
+			<h1 class="col-12 mt-4 mb-4">Song Search Form</h1>
+		</div> <!-- .row -->
+	</div> <!-- .container -->
+	<div class="container">
+
+
+
+	<div id="circles">
+
+		<a href="gallery.html">
+		<div class="circle">
+			<div class="caption">This is a circle</div>
+			<img src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw82199b5e/products/ROMLB-1.jpg?sw=800&sfrm=png&bgcolor=ebebeb">
+		</div>
+		</a>
+
+		<div class="circle">
+			<div class="caption">This is not a circle</div>
+
+		</div>
+
+		<div class="circle">
+			<div class="caption">This is a circle</div>
+		</div>
+
+		<div class="circle">
+			<div class="caption">This is a circle</div>
+		</div>
+
+		<div class="circle">
+			<div class="caption">This is a circle</div>
+		</div>
+
+	</div>
+
+	
+</body>
+</html>
