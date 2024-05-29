@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Favorite Players List</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
+	<style>
+		/* Similarly to A5, I set each required element to have a class called 'required' and put a red asterik after it to show it is required */
+		.required:after {
+			content: " *";
+			color: #d62a1e;
+		}
+		/* Set all images to have the same width and set height to auto */
+		.images {
+			width: 150px;
+			height: auto;
+		}
+		/* Center table headers and data */
+		th {
+			text-align: center;
+		}
+		tr {
+			text-align: center;
+		}
+	</style>
+
+</head>
+<body>
+	<!-- Container for Bootstrap - use 'row' class so we have our form in a nice format -->
+	<div class="container">
+		<div class="row">
+			<h1 class="col-12 mt-5 mb-4">Favorite MLB Players</h1>
+		</div> <!-- .row -->
+
+		<!-- We want a section that spans all 12 columns -->
+		<div class="col-12">
+
+			<form id="players-list">
+
+				<!-- This is a form so we use the bootstrap class 'form-group row' -->
+				<div class="form-group row">
+					<!-- For all of the labels, we want them to span 2 columns and align as a form normally would (use bootstrap col-form-label) -->
+					<label for="name" class="required col-sm-2 col-form-label">Full Name:</label>
+					<!-- For all of our accessible content (the box where users can submit information), we want it to span the remaining 10 columns and we use the form-control class from bootstrap to make it a text field with placeholders-->
+					<div class="col-sm-10">
+						<input type="text" name="name" class="form-control" placeholder="Mike Trout" id="name">
+
+						<!-- Error message that we will use javascript to display -->
+						<small id="name-error" class="form-text text-danger"></small>
+
+					</div>
+				</div> <!-- .form-group -->
+
+				<!-- Same as above but for team -->
+				<div class="form-group row">
+					<label for="team" class="required col-sm-2 col-form-label">Team:</label>
+					<div class="col-sm-10">
+						<input type="text" name="team" class="form-control" placeholder="Los Angeles Angels" id="team">
+
+						<!-- Error message that we will use javascript to display -->
+						<small id="team-error" class="form-text text-danger"></small>
+
+					</div>
+				</div> <!-- .form-group -->
+
+				<!-- Same as above -->
+				<div class="form-group row">
+					<label for="position" class="required col-sm-2 col-form-label">Position:</label>
+
+					<div class="col-sm-10">
+						<!-- Instead of text, now we are using a dropdown menu - set the options to be each position a baseball player can be and make the user pick one -->
+						<select id="position" class="form-control">
+							<option value="SP">SP</option>
+							<option value="RP">RP</option>
+							<option value="C">C</option>
+							<option value="1B">1B</option>
+							<option value="2B">2B</option>
+							<option value="3B">3B</option>
+							<option value="SS">SS</option>
+							<option value="LF">LF</option>
+							<option value="CF">CF</option>
+							<option value="RF">RF</option>
+							<option value="DH">DH</option>
+						</select>
+					</div>
+
+				</div> <!-- .form-group -->
+
+				<!-- Same as name and team but for image input -->
+				<div class="form-group row">
+					<!-- Don't put 'required' in the class list because image url is optional (the other 3 have it because they are required) -->
+					<label for="image" class="col-sm-2 col-form-label">Image URL:</label>
+					<div class="col-sm-10">
+						<input type="text" name="image" class="form-control" placeholder="https://" id="image">
+
+						<!-- Error message that we will use javascript to display -->
+						<small id="image-error" class="form-text text-danger"></small>
+
+						<!-- Add this at the bottom so people know the fields with red asteriks are required and image url is not -->
+						<small id="required-note" class="form-text text-danger">* Required</small>
+
+					</div>
+				</div> <!-- .form-group -->
+
+
+				<!-- Add button at the bottom -->
+				<div class="form-group row">
+					<div class="col-sm-12 offset-sm-2">
+						<button role="button" type="submit" class="btn btn-primary">Add</button>
+					</div> <!-- .col -->
+				</div>
+			</form>
+
+		<!-- Now make another section for the list of favorite players  -->
+		<div class="row">
+			<h2 class="col-12">Your List</h2>
+			<div class="col-12 mt-3">
+				<!-- Make a button to delete all items -->
+				<button id="simple-delete" class="btn btn-outline-danger mb-3">Delete All</button>
+
+				<!-- Make the top row have bold labels for Name, Teaam, Position, and Image -->
+				<table id="player-list" class="table table-hover">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Team</th>
+							<th>Position</th>
+							<th>Image</th>
+
+						</tr>
+
+					</thead>
+
+					<!-- Make a table body for our items -->
+					<tbody>
+
+						<!-- Use tr to make our rows, I will have 3 default values -->
+						<tr>
+							<!-- Use td to make new columns in each row -->
+							<td>Mike Trout</td>
+							<td>Los Angeles Angels</td>
+							<td>CF</td>
+							<!-- Put default images and put them in a class called 'images' so that we can access them in java/css -->
+							<td><img class="images" src="https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/30836.png&w=350&h=254" alt="Mike Trout Image"></td>
+							<!-- Our last column is a delete button for each item -->
+							<td><button class="delete btn btn-outline-danger mb-3">Delete</button></td>
+						</tr>
+
+						<!-- Same as above for the next two items, just different players -->
+						<tr>
+							<td>Aaron Judge</td>
+							<td>New York Yankees</td>
+							<td>CF</td>
+							<td><img class="images" src="https://a.espncdn.com/i/headshots/mlb/players/full/33192.png" alt="Aaron Judge Image"></td>
+							<td><button class="delete btn btn-outline-danger mb-3">Delete</button></td>
+						</tr>
+
+						<tr>
+							<td>Jacob deGrom</td>
+							<td>New York Mets</td>
+							<td>SP</td>
+							<td><img class="images" src="https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/32796.png&w=350&h=254" alt="Jacob deGrom Image"></td>
+							<td><button class="delete btn btn-outline-danger mb-3">Delete</button></td>
+						</tr>
+
+					</tbody>
+
+				</table>
+			</div> <!-- .col -->
+		</div> <!-- .row -->
+
+	</div>
+</div>
+
+
+
+<script>
+	// This function removes each item when we click the delete button
+	const bindRemoveBtns = () => {
+			// Grab all the delete buttons (which are in a 'delete' class)
+			let buttons = document.querySelectorAll(".delete");
+
+			// Loop through each button and remove the full row (we use parent twice because the parent of the delete button is the td, and then parent of td is tr, which removes the full row)
+			for (button of buttons) {
+				button.onclick = function() {
+					this.parentNode.parentNode.remove();
+				}
+			}
+		}
+
+		// This function deletes all the items in the list - grab the 'Delete All' button which has id='simple-delete' and then whenever it is clicked set the whole tbody to empty (remove all elements in the table)
+		document.querySelector("#simple-delete").onclick = () => {
+			document.querySelector("#player-list tbody").innerHTML = ``;
+		}
+
+		// This function will run every time the 'add' button is clicked/submitted
+		document.querySelector("#players-list").onsubmit = () => {
+
+			// Grab all of the input values and set them as constants
+			const name = document.querySelector("#name").value.trim();
+			const team = document.querySelector("#team").value.trim();
+			const position = document.querySelector("#position").value;
+			const img = document.querySelector("#image").value.trim();
+
+			// If the length of the name is 0, get the name-error id and display an error message using innerHTML
+			if (name.length == 0){
+				// grab email error from above
+				document.querySelector("#name-error").innerHTML = "Name cannot be empty.";
+			}
+			// If they input something, remove the name error
+			else{
+				document.querySelector("#name-error").innerHTML = ``;
+			}
+
+			// If the length of the team is 0, get the team-error id and display an error message using innerHTML. Note: the final required value (position) is a dropdown menu so there will always be a value. Therefore, we don't have to error check for it
+			if (team.length == 0){
+				// grab email error from above
+				document.querySelector("#team-error").innerHTML = "Team cannot be empty.";
+			}
+			else{
+				document.querySelector("#team-error").innerHTML = ``;
+			}
+
+			// Make sure that the name and team length are greater than 0 (there is an input)
+			if (name.length > 0 && team.length > 0) {
+				// Get a list of all the tds
+				const listItems = document.querySelectorAll("#player-list td");
+				
+				/*
+					loop through all item to find duplicate
+					if duplicate found:
+						- show error message
+						- terminate the function
+				*/
+
+						for (item of listItems) {
+							if (name.toLowerCase() == item.innerHTML.toLowerCase()) {
+								alert(name + " is already in the list.");
+								return false;
+							}
+						}
+
+				// querySelectorAll creates array - only want first element
+				const firstItem = document.querySelectorAll("#player-list tbody tr")[0];
+
+				// Grab our table body and then create elements for the tr and all of the td's
+				let tb = document.querySelector("#player-list tbody");
+				const tr = document.createElement("tr");
+				const td = document.createElement("td");
+				const td1 = document.createElement("td");
+				const td2 = document.createElement("td");
+				const td3 = document.createElement("td");
+				const td4 = document.createElement("td");
+
+				// Create elements for the img and button because they are not text
+				const image = document.createElement("img");
+				const button = document.createElement("button");
+
+				// Check if the user inputted something for the image url - if they did, set the image source to be their inputted url and the image alt to "your player image"
+				if(img.length > 0){
+					image.src = img;
+					image.alt = "Your player image";
+				}
+				// If they didn't put anything for image url, put a default image as the image source and set the image alt to "no image available"
+				else{
+					image.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+					image.alt = "No_image_available"
+				}
+
+				// Set the inner html to name, team, and position for corresponding td's to make sure our values show up and then set the button inner html to "Delete" so that it will show up as a delete button
+				td.innerHTML = name;
+				td1.innerHTML = team;
+				td2.innerHTML = position;
+				button.innerHTML = "Delete";
+
+				// Add the required classes of our delete button from html
+				button.classList.add("delete", "btn", "btn-outline-danger", "mb-3");
+				// Add the 'images' class to our image so that it is formatted like the rest of the images
+				image.classList.add("images");
+				// Append the button and image to their corresponding td's - don't need to do this for the text elements because they are not elements themselves
+				td4.appendChild(button);
+				td3.appendChild(image);
+
+				// Append each of the td's to the row so that they will show up in the right order
+				tr.appendChild(td);
+				tr.appendChild(td1);
+				tr.appendChild(td2);
+				tr.appendChild(td3);
+				tr.appendChild(td4);
+				// Insert our tr before the first item so it will be on top
+				tb.insertBefore(tr, firstItem);
+				
+				// clear the form so users can input new data
+				document.querySelector("#name").value = '';
+				document.querySelector("#team").value = '';
+				document.querySelector("#image").value = '';
+
+			}
+
+			// Call bindRemoveBtns() function so we remove a button when the user clicks delete (even for new items)
+			bindRemoveBtns();
+			// Return false so clicking submit/add doesn't refresh the page
+			return false;
+		}
+
+		// Call the bindRemoveBtns() function one more time in case users click 'delete' on items before they add new ones/click submit
+		bindRemoveBtns();
+
+	</script>
+
+</body>
+</html>
