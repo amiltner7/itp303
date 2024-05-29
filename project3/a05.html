@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contact Form</title>
+	<!-- In order to use bootstrap we need the following two lines -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+	<style>
+
+		/* I am using bootstrap for most formatting, but there are a few things that were easier with css. First, I used it to create the red asteriks signifying a field is required. I made all of the labels have a class called required and then used css to put a red colored asterik after each label */
+		.required:after {
+			content: " *";
+			color: #d62a1e;
+		}
+		/* I also used css to get the character counter (x/500) to go on the bottom right side of the message box */
+		#character-counter {
+			text-align: right;
+		}
+
+	</style>
+
+</head>
+
+<body>
+	<!-- The overall structure of my code is copied from the in-class form example. We start with a container to keep everything aligned -->
+	<div class="container">
+		<!-- Use row class for bootstrap to keep things aligned row to row -->
+		<div class="row">
+			<!-- Our first row will display our header - "Contact Form" -->
+			<h2 class="col-12 mt-5 mb-4">Contact Form</h2>
+
+			<!-- We want a section that spans all 12 columns -->
+			<div class="col-12">
+
+				<!-- When we submit the form we want it to access the confirmation.html page -->
+				<form id="contact-form" action="confirmation.html">
+
+					<!-- This is a form so we use the bootstrap class 'form-group row' -->
+					<div class="form-group row">
+						<!-- For all of the labels, we want them to span 2 columns and align as a form normally would (use bootstrap col-form-label) -->
+						<label for="name" class="required col-sm-2 col-form-label">Full Name:</label>
+						<!-- For all of our accessible content (the box where users can submit information), we want it to span the remaining 10 columns and we use the form-control class from bootstrap to make it a text field with placeholders-->
+						<div class="col-sm-10">
+							<input type="text" name="name" class="form-control" placeholder="Tommy Trojan" id="name">
+
+							<!-- Error message that we will use javascript to display -->
+							<small id="name-error" class="form-text text-danger"></small>
+
+						</div>
+					</div> <!-- .form-group -->
+
+					<div class="form-group row">
+						<!-- <label for="provide-one" class="required col-sm-2 col-form-label">Provide One:</label> -->
+						<div class="required col-sm-2 col-form-label">
+							Provide One:
+						</div>
+						<div class="col-sm-10">
+							<!-- The only difference with this section is that we want 2 text fields - email and phone number. So we create another row div -->
+							<div class="row">
+								<!-- Labels for each of email and phone number that are still 2 columns wide -->
+								<label for="email" class="col-sm-2 col-form-label">Email:</label>
+								<!-- One more div that makes the text field 10 columns for each -->
+								<div class="col-sm-10">
+									<input type="text" name="email" class="form-control" placeholder="ttrojan@usc.edu" id="email">
+									<small id="email-error" class="form-text text-danger"></small>
+								</div>
+
+								<label for="phone" class="col-sm-2 col-form-label">Phone:</label>
+								<div class="col-sm-10">
+									<input type="text" name="phone" class="form-control" placeholder="111-111-1111" id="phone">
+									<small id="phoneemail-error" class="form-text text-danger"></small>
+								</div>
+							</div>
+
+							
+						</div> <!-- .col -->
+					</div> <!-- .form-group -->
+
+					<div class="form-group row">
+						<label for="message" class="required col-sm-2 col-form-label">Message:</label>
+						<div class="col-sm-10">
+							<!-- The only difference with this section is that we want it to be a text AREA instead of text field - so we make it form floating and then style it so the height is 100px (note: specifically use textarea instead of div) -->
+							<div class="form-floating">
+								<textarea class="form-control" placeholder="Leave your message here" id="message" style="height:100px"></textarea>
+
+								<!-- This will start as 0/500 (no characters enter) and will be updated as the user types using javascript -->
+								<small id="character-counter" class="form-text">0 / 500</small>
+
+								<small id="message-error" class="form-text text-danger"></small>
+
+							</div>
+						</div> <!-- .form-group -->
+					</div>
+
+					<!-- This sets the bottom margin to 3 -->
+					<div class="row mb-3">
+						<!-- We want our checkbox to span 10 columns but be offset by the 2 where the labels are above so it is inline with the text boxes -->
+						<div class="col-sm-10 offset-sm-2">
+							<div class="form-check">
+								<!-- Set type="chechbox" so bootstrap gives us an actual box that we can check -->
+								<input class="form-check-input" type="checkbox" id="acceptbox">
+								<label class="required form-check-label" for="acceptbox">
+									I accept Terms & Conditions
+								</label>
+
+							</div>
+							<small id="accept-error" class="form-text text-danger"></small>
+						</div>
+					</div>
+
+
+					<div class="form-group row">
+						<div class="col-sm-10">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div> <!-- .col -->
+					</div> <!-- .form-group -->
+
+				</form>
+			</div> <!-- .col -->
+		</div> <!-- .row -->
+	</div> <!-- .container -->
+
+	<script>
+		// Get the full contact-form id and when we submit the form, enter the following function that will determine whether it should go to confirmation page or not
+		document.querySelector("#contact-form").onsubmit = function() {
+			// Start with validForm as true (submit to confirmation page) and update to false if there are any errors
+			let validForm = true;
+
+			// Store the name and trim the spacing from the front and end 
+			const name = document.querySelector("#name").value.trim();
+
+			// If the length of the name is 0, set validForm to false so that it will not submit and get the name-error id and display an error message using innerHTML
+			if (name.length == 0){
+				validForm = false;
+				// grab email error from above
+				document.querySelector("#name-error").innerHTML = "Name cannot be empty.";
+			}
+			// Use regex to check if it is a full name: first look for any word characters by doing \w, then look for a space by doing \s, and then look for more word characters \w after the space. This ensures that a first name is entered, then a space, and then a last name. If this is false, then set validForm to false and grab the name error and say they must provide a full name
+			else if (/\w\s\w/.test(name) == false) {
+				validForm = false;
+				// grab email error from above
+				document.querySelector("#name-error").innerHTML = `You must provide full name`;
+			}
+			// If neither of these errors occur, the name is good to go and we can set our name error back to nothing and validForm will stay true
+			else{
+				document.querySelector("#name-error").innerHTML = ``;
+			}
+
+			// Get email and phone values and trim spaces from front and end
+			const email = document.querySelector("#email").value.trim();
+			const phone = document.querySelector("#phone").value.trim();
+
+			// If the legnth of the email is 0 and the length of the phone number is 0, set validForm to false and grab phoneemail-error to say they must provide one or the other
+			if (email.length == 0){
+				if (phone.length == 0) {
+					validForm = false;
+					// grab email error from above
+					document.querySelector("#phoneemail-error").innerHTML = "You must provide either email or phone";
+				}
+				// If there is no email but there is a phone number entered, we can set the error to nothing since it is valid (they entered one or the other)
+				else {
+					document.querySelector("#phoneemail-error").innerHTML = ``;
+				}
+			}
+			// If there is no @ symbol, it is not a valid email, so we should first remove the phoneemail-error (since they at least entered something in the email field) but set validForm to false and display an email error saying the email is invalid
+			else if (email.indexOf("@") == -1) {
+				document.querySelector("#phoneemail-error").innerHTML = ``;
+				validForm = false;
+				// grab email error from above
+				document.querySelector("#email-error").innerHTML = `Invalid email`;
+			}
+			// If there is a valid email or phone number, we can submit the form
+			else{
+				document.querySelector("#email-error").innerHTML = ``;
+			}
+
+			// Store the message in a variable and trim spaces from front and end
+			const message = document.querySelector("#message").value.trim();
+			// Now store the message but untrimmed in a different variable so that we can check if the total number of characters exceeds 500
+			const message_untrimmed = document.querySelector("#message").value;
+
+			// If the length of the message is 0, set validForm to false and tell them that the message cannot be empty (grab message-error)
+			if(message.length == 0) {
+				validForm = false;
+				// grab email error from above
+				document.querySelector("#message-error").innerHTML = "Message cannot be empty";
+			}
+			// If their message length is greater than 500 characters, set validForm to false and display the message error
+			else if (message_untrimmed.length > 500) {
+				validForm = false;
+				// grab email error from above
+				document.querySelector("#message-error").innerHTML = "Message cannot exceed 500 characters";
+			}
+			// Otherwise the message is good and we can remove the error message and submit
+			else{
+				document.querySelector("#message-error").innerHTML = ``;
+			}
+
+			// If the checkbox is not checked, set validForm to false and tell the user they must check the box
+			if(document.querySelector("#acceptbox").checked == false){
+				validForm = false;
+				document.querySelector("#accept-error").innerHTML = "You must accept terms and conditions";
+			}
+			// If they check it, set error to nothing and submit
+			else {
+				document.querySelector("#accept-error").innerHTML = ``;
+			}
+
+			// Return the validForm boolean. If true, the form will submit and display the confirmation page; if false, it will not
+			return validForm;
+
+		}
+
+		// To count the number of characters the user is typing, we can create a function that grabs the message and is run every time a key is pressed (onkeyup)
+		document.querySelector("#message").onkeyup = function(event) {
+			// First grab the message length
+			messageLength = document.querySelector("#message").value.length;
+
+			// Then grab the character-counter id and set the innerHTML to the new length out of 500
+			document.querySelector("#character-counter").innerHTML = messageLength + " / 500";
+
+		}
+		
+
+	</script>
+
+</body>
+</html>
