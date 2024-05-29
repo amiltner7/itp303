@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- We need the meta tag and external href to use bootstrap -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+	<title>Email</title>
+	<!-- Link the main.css file so that we have same css on all pages -->
+	<link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+
+	<!-- Same menu bar on every page for consistency -->
+	<ul id="menu_bar">
+		<li><a href="home.php"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Major_League_Baseball_logo.svg/1200px-Major_League_Baseball_logo.svg.png" alt="MLB Logo"></a></li>
+		<li>
+			<a href="add_player.php">Add Player</a>
+		</li>
+		<!-- Make this active-nav which highlights it since we are on the email page -->
+		<li><a id="active-nav" href="email.html">Email me more</a></li>
+	</ul>
+
+	<!-- Container for bootstrap -->
+	<div class="container">
+			<div id="exp" class="col-12">
+				<!-- We have a simple form to just get the email of the user - use POST so we can send the actual value (their email) to email_confirmation.php so we can actaully send the email to the desired adddress -->
+				<form action="email_confirmation.php" method="POST">
+
+					<div class="form-group row">
+						<div class="col-sm-3 col-form-label">
+							<h2>Email me more</h2>
+						</div>
+					</div>
+
+					<!-- We just need one text field for their email -->
+					<div class="form-group row">
+						<label for="email" class="col-sm-3 col-form-label text-sm-right">Email: <span class="text-danger">*</span></label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="email" name="email">
+						</div>
+					</div> <!-- .form-group -->
+
+					<div class="buttons form-group row">
+						<div class="col-sm-3 col-form-label">
+						<!-- <div class="col-sm-9 mt-2"> -->
+							<button type="submit" class="btn btn-primary mr-1">Submit</button>
+							<button type="reset" class="btn btn-light">Reset</button>
+						<!-- </div> -->
+						</div>
+					</div> <!-- .form-group -->
+
+				</form>
+			</div>
+	</div>
+
+	<!-- Same footer as other pages -->
+	<div id="footer" class="container-fluid text-center">
+		Aidan Miltner Final Project &copy; 2022
+	</div> <!-- close #footer -->
+
+	<!-- Need script right before the body closes for bootstrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
+
+

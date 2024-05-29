@@ -1,0 +1,109 @@
+/* All pages have the same menu bar - we want to make the list-style none to make them appear in a line for the menu bar,
+and set margin and padding to 0*/
+#menu_bar, #menu_bar ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Set the background color to red and make each element 150px - center the titles within each li and 
+make the position relative to the ul */
+#menu_bar li {
+	background-color: #b50a04;
+	width: 150px;
+	text-align: center;
+
+	position: relative;
+}
+
+/* By default, make our image (the mlb logo) 75px wide and height auto */
+img {
+	width: 75px;
+	height: auto;
+}
+
+/* The menu_bar is what we called our container for the menu, so it should be display flex for our flexbox. Flex-start aligns things on the same axis to the
+left, and then we justify the content to center it on the page. The position is sticky so that the menu moves to the top once we scroll past the background
+image on top. The z-index is 1 so that the menu is on top (which becomes a problem with images)*/
+#menu_bar {
+	display: flex;
+	align-items: flex-start;
+	justify-content: left;
+	background-color: #ab170c;
+	/*position: sticky;*/
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	z-index: 1;
+}
+
+/* When we hover over each list item, we want it to change color so the user knows where they are - make the background color navy */
+#menu_bar li:hover {
+	background-color: #21224d;
+}
+
+/* Set text decoration to none to remove bullet points. Make the anchor tags white and display them as block so that when we hover over any part of the button
+it allows us to click and use that option.*/
+#menu_bar a {
+	text-decoration: none;
+	color: #FFF;
+
+	display: block;
+	height: 50px;
+	line-height: 50px;
+}
+
+/* Make the ul position absolute so that the li's can be relative to it. Remove bullet points by setting display to none*/
+#menu_bar ul {
+	position: absolute;
+	display: none;
+	z-index: 1;
+}
+
+/* When we hover over each ul, display block so we can click anywhere on the block */
+#menu_bar li:hover ul{
+	display: block;
+}
+
+/* When we hover over the anchor tags and active-nav, make it navy */
+#menu_bar a:hover, #active-nav {
+	background-color: #21224d;
+}
+
+/* The explanation section is a curved-bordered div - set margin-top to 50px so that it is not too close to the menu bar on top, padding 20px so there is room
+between the border and the content, border color gray, border-radius to make it curved, and center the text within */
+#exp {
+	margin-top: 50px;
+	padding: 20px;
+	border: 2px solid #dbdbdb;
+	border-radius: 25px;
+	text-align: center;
+}
+
+/* The footer will be on all pages as well - set position fixed and bottom:0 which sticks it to the bottom of the page - left:0 and right:0 so 
+it spans the full length of the page */
+#footer {
+	/*	might need to change when we scroll */
+	position: fixed;
+	bottom: 0;
+
+	left: 0;
+	right: 0;
+
+	/* Make the background color navy and the text color white - align it in the center. Also make it a fixed height and set the text to be centered
+	vertically as well */
+	background-color: #21224d;
+	color: #FFF;
+	text-align: center;
+	height: 50px;
+	line-height: 50px;
+
+	/* Puts it on top of every other element */
+	z-index: 100;
+}
+
+/* Set a top and bottom margin for buttons so they are separated from the forms */
+.buttons {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
