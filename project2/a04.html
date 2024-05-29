@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- We need the meta tag and external href to use bootstrap -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+	<title>Wrigley Field</title>
+
+	<style>
+		body {
+			background-color: #0714a3;
+		}
+		#header {
+			background-image: url('img/wrigley_sign.jpeg');
+			background-size: cover;
+			background-position: center;
+			margin:0px;
+
+			text-shadow: 0px 0px 5px #000;
+		}
+		h1 {
+			line-height: 200px;
+			color: #FFF;
+		}
+		img {
+			padding: 10px;
+		}
+		#content {
+			background-color: #FFF;
+		}
+		#sidebar {
+			background-color: #dbd9d9;
+		}
+		#sidebar img {
+			max-width: 100%;
+		}
+		#footer {
+			background-color: #797a79;
+			color: #FFF;
+			font-size: 0.8em;
+			height: 50px;
+			line-height: 50px;
+		}
+		/* Small devices (landscape phones, 576px and up) */
+		@media (min-width: 576px) { 
+		}
+		/* Medium devices (tablets, 768px and up) */
+		@media (min-width: 768px) { 
+		}
+		/* Large devices (desktops, 992px and up) */
+		@media (min-width: 992px) { 
+		/*.p_images {
+			width: 300px;
+			float: right;
+			padding: 5px;
+		}*/
+	}
+	/* Extra large devices (large desktops, 1200px and up) */
+	@media (min-width: 1200px) { 
+	}
+</style>
+</head>
+<body>
+	<!-- This is our container for our bootstrap (where our content will be). We want it centered so we use the text-center class, and then fluid so that it is responsive (stays at 100% as we increase/decrease the size of the device/screen). I am using the same names as what we used in lecture for ease -->
+	<div id="header" class="container-fluid text-center">
+		<h1>Wrigley Field</h1>
+	</div> <!-- #header -->
+
+	<!-- This is our main container so that I can adjust the size of my actual content within -->
+	<div id="main" class="container">
+		<!-- We just want one row in our grid so we use the row class -->
+		<div class="row">
+			<!-- For our main content, we want all 12 columns filled for small and medium devices (phones and tablet) and 8 columns for large devices (the sidebar will take up the remaining 4 on the right side)-->
+			<div id="content" class="col-12 col-lg-8">
+				<h2>History</h2>
+				<!-- For mobile (small) devices, I want my image to span 8 columns and be centered. For tablet (medium) devices, I want the image to be a little larger so I made it 10 columns but still centered, and then for desktop (large) devices I want the image to be 8 columns but also float to the right (text wraps around image) so I use the rounded float-end class -->
+				<img src="img/historic_wrigley.jpeg" class="col-8 col-md-10 col-lg-8 rounded float-lg-end mx-auto rounded mx-auto d-block p_images" alt="Wrigley Field 1914">
+				<p>Baseball executive Charles Weeghman hired his architect Zachary Taylor Davis to design the park, which was ready for baseball by the home opener on April 23, 1914. The original tenants, the Chicago Whales (also called the Chi-Feds), came in second in the Federal League rankings in 1914, and won the league championship in 1915.
+
+				In late 1915, Weeghman's Federal League folded. The resourceful Weeghman formed a syndicate including the chewing gum manufacturer William Wrigley Jr. to buy the Chicago Cubs from Charles P. Taft for about $500,000. Weeghman immediately moved the Cubs from the dilapidated West Side Grounds to his two-year-old park.</p>
+
+				<p>In 1918, Wrigley acquired the controlling interest in the club. In November 1926, he renamed the park Wrigley Field. In 1927, an upper deck was added, and in 1937, Bill Veeck, the son of the club president, planted ivy vines against the outfield walls after seeing the ivy planted at Perry Stadium, Indianapolis.</p>
+
+				<h2 id="usage">Usage</h2>
+
+				<!-- Same syntax as above but I float the image to the left this time using float-start (only for large devices) -->
+				<img src="img/football.jpeg" class="col-8 col-md-10 col-lg-8 rounded float-lg-start mx-auto rounded mx-auto d-block p_images" alt="Football at Wrigey Field">
+
+				<p>Wrigley Field's first tenant was the Federal League team, the Chicago Whales, from 1914 to 1915. It has served as the home baseball park for Major League Baseball's Chicago Cubs franchise since 1916.</p>
+				<p>The Chicago Bears of the National Football League played at Wrigley Field from 1921 to 1970 before relocating to Soldier Field. The team had transferred from Decatur, and retained the name "Staleys" for the 1921 season. They renamed themselves the Bears in order to identify with the baseball team, then a common practice in the NFL. Wrigley Field once held the record for the most NFL games played in a single stadium, with 365 regular season games, but this record was surpassed in 2003 by Giants Stadium in New Jersey, thanks to its dual-occupancy by the New York Giants and New York Jets. On September 14, 2003, the game played between the Jets and Miami Dolphins was the 366th regular season NFL game at Giants Stadium, breaking Wrigley's regular season record.[42] The 50 seasons the Bears spent at Wrigley Field had been an NFL record until 2006, when Lambeau Field duplicated this feat by hosting the Green Bay Packers for a 50th season and broke it in 2007. Soldier Field also matched the accomplishment when the Bears played there for their 50th season in 2021.</p>
+				<p>Wrigley Field has also hosted soccer games, the 2009 Winter Classic between the Chicago Blackhawks and Detroit Red Wings, and dozens of concerts.</p>
+
+				<h2 id="scoreboard">Scoreboard</h2>
+
+				<!-- Same as my first image - float to the right for large devices -->
+				<img src="img/scoreboard.jpeg" class="col-8 col-md-10 col-lg-8 rounded float-lg-end mx-auto rounded mx-auto d-block p_images" alt="Wrigley Field Scoreboard">
+
+				<p>The scoreboard was installed in 1937, when Bill Veeck installed the new bleachers. It has remained in place ever since, and has only seen minor technical and cosmetic modifications. The clock was added in 1941, and a fifth row of scores was added to each side in 1961, with a sixth by 1969. A set of light stands facing onto the scoreboard was added in 1988 with the introduction of night games.</p>
+
+				<p>Along with Fenway Park's scoreboard and Minute Maid Park, Oakland-Alameda County Coliseum and Oracle Park's out of town scoreboards, Wrigley is one of the last parks to maintain a hand-turned scoreboard. A number turner watches the score changes on a computer (a ticker tape machine was used in the past), and updates the scoreboard by manually replacing the numbers from within the scoreboard. The scoreboard is made of sheet steel. The numbers that are placed into the inning windows are also steel, painted forest green, and numbered with white numerals. The box for the game playing at Wrigley uses yellow numerals for the current inning. The clock, which sits at the top center of the scoreboard, has never lost time in its 81-year existence.</p>
+
+				<p>Standing over the clock are three flagpoles, one for each division in the National League. There are 15 flags, one for each National League team, and their order on the flagpoles reflects the current standings. The entrance to the scoreboard is a trap-door on the bottom. On the reverse of the scoreboard, visible from the CTA elevated trains, is a blue Cubs pennant in white outlined in red neon. The scoreboard was extensively rehabilitated for the 2010 season.</p>
+			</div> <!-- #content -->
+
+			<!-- Since bootstrap wraps content, we make the sidebar span 12 columns for small and medium devices so that it shows up right under our main content. For large devices, we make it span 4 columns so that it appears on the right side of the content -->
+			<div id="sidebar" class="col-12 col-lg-4">
+
+				<h2>Images</h2>
+
+				<!-- We use another row class so that we can format the images within our sidebar container -->
+				<div class="row">
+
+					<!-- We have div's for each image in our sidebar so that they are separate and span across the page, but they each have the same size and format. For small (mobile) devices, we want each image to span 6 columns in our main container (so that we have 2 images in each row). For medium (tablet) devices, we want each image to span 3 columns so that all 4 images fit in one row. Finally, for large devices, we want each image to span 8 columns in the sidebar section on the right. We want them centered regardless so use text-center to do this -->
+					<div class="col-6 col-md-3 col-lg-8 mx-auto text-center">
+						<img src="img/renovation.jpeg" alt="Wrigley Field Renovation">
+						<p>Cubs owner Tom Ricketts began renovations on Wrigley Field in 2014 in order to modernize the stadium but also preserve its historic charm</p>
+					</div>
+
+					<div class="col-6 col-md-3 col-lg-8 mx-auto text-center">
+						<img src="img/ivy.jpeg" alt="Wrigley Field Ivy">
+						<p>Wrigley Field is famous for its live ivy along the outfield wall</p>
+					</div>
+
+					<div class="col-6 col-md-3 col-lg-8 mx-auto text-center">
+						<img src="img/lights.jpeg" alt="Wrigley Field Lights">
+						<p>Wrigley Field was the last stadium to install lights, meaning the Cubs used to only play during the day. The first night game at Wrigley was on August 8, 1988</p>
+					</div>
+
+					<div class="col-6 col-md-3 col-lg-8 mx-auto text-center">
+						<img src="img/w_flag.jpeg" alt="W Flag">
+						<p>Whenever the Cubs win, the W flag flies above the center field scoreboard at Wrigley</p>
+					</div>
+				</div> <!-- close .row -->
+
+			</div> <!-- close #sidebar -->
+		</div> <!-- close .row -->
+
+	</div> <!-- close #main -->
+
+	<!-- Same footer as assignment 2. We set it as container-fluid so it spans across the whole page, and we want the text centered -->
+	<div id="footer" class="container-fluid text-center">
+		University of Southern California &copy; 2022
+	</div> <!-- close #footer -->
+
+	<!-- Need script right before the body closes for bootstrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+</body>
+</html>
